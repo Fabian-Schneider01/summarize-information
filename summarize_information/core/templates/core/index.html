@@ -4,12 +4,16 @@
 </head>
 <body>
     <h1>Summarize Information</h1>
-    <form>
+    
+    <form method="post">
+        {% csrf_token %}
         <div class="input-wrapper">
-            <input>
+            <label>Text to summarize</label>
+            <input type="text" name="unsummarizedText">
         </div>
         <div class="input-wrapper">
-            <input>
+            <label>Summarized Text</label>
+            <input type="text" name="summarizedText">
         </div>
         <div class="input-wrapper">
             <button type="submit">Submit</button>
