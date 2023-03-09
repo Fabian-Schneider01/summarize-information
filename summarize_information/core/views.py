@@ -43,7 +43,7 @@ def getOutputIfExists(text):
 def authenticate_client():
     ta_credential = AzureKeyCredential(AZURE_API_KEY)
     text_analytics_client = TextAnalyticsClient(
-            endpoint=AZURE_API_KEY, 
+            endpoint=AZURE_API_ENDPOINT, 
             credential=ta_credential)
     return text_analytics_client
 

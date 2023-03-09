@@ -4,41 +4,33 @@
 </head>
 <body>
     <nav class="navbar bg-dark" data-bs-theme="dark">
-        <h3 >Summarize Information</h1>
+        <h3 class="m-2">Summarize Information</h1>
     </nav>
-    
     
     <form method="post">
         {% csrf_token %}
-        <div class="row">
-            <div class="card col-sm-5 p-0">
+        <div class="row m-3">
+            <div class="card col p-0 m-2">
                 <div class="card-header">
                   Input
                 </div>
                 <div class="card-body">
-                    <textarea class="form-control" aria-label="With textarea" type="text" name="unsummarizedText"></textarea>
+                    <textarea class="form-control" aria-label="With textarea" type="text" name="unsummarizedText" style="height: 60vh"></textarea>
                 </div>
             </div>
-            <div class="card col-sm-5 p-0">
+            <div class="card col p-0 m-2">
                 <div class="card-header">
                   Output
                 </div>
                 <div class="card-body">
-                    <textarea class="form-control" aria-label="With textarea">{{summarizedText}}</textarea>
+                    <textarea class="form-control" aria-label="With textarea" style="height: 60vh">{{summarizedText}}</textarea>
                 </div>
             </div>
         </div>
-        <div class="input-wrapper">
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <div class="row m-3">
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </div>
         </div>
-        <!-- <div class="input-wrapper">
-            <label>Text to summarize</label>
-            <input type="text" name="unsummarizedText">
-        </div>
-        <div class="input-wrapper">
-            <label>Summarized Text</label>
-            <input type="text" name="summarizedText">{{summarizedText}} 
-            <div><p>{{summarizedText}}</p></div>
-        </div> -->
     </form>
 </body>
