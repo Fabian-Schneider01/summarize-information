@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
     <nav class="navbar bg-dark" data-bs-theme="dark">
@@ -12,25 +13,32 @@
         <div class="row m-3">
             <div class="card col p-0 m-2">
                 <div class="card-header">
-                  Input
+                  Unsummarized Text
                 </div>
                 <div class="card-body">
-                    <textarea class="form-control" aria-label="With textarea" type="text" name="unsummarizedText" style="height: 60vh"></textarea>
+                    <textarea class="form-control input-text" aria-label="With textarea" type="text" name="unsummarizedText" style="height: 60vh">{{unsummarizedText}}</textarea>
                 </div>
             </div>
             <div class="card col p-0 m-2">
                 <div class="card-header">
-                  Output
+                  Summarized Text
                 </div>
                 <div class="card-body">
-                    <textarea class="form-control" aria-label="With textarea" style="height: 60vh">{{summarizedText}}</textarea>
+                    <textarea readonly class="form-control output-text" aria-label="With textarea" style="height: 60vh">{{summarizedText}}</textarea>
                 </div>
             </div>
         </div>
         <div class="row m-3">
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                <button type="submit" class="btn btn-primary btn-lg m-1">Submit</button>
+                <button type="button" class="btn btn-primary btn-lg clear-button m-1">Clear</button>
             </div>
         </div>
     </form>
 </body>
+<script>
+    $(".clear-button").click(() => {
+        $(".input-text").val("");
+        $(".output-text").val("");
+    });
+</script>
