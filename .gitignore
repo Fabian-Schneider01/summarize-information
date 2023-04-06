@@ -1,5 +1,5 @@
 venv
 **/__pycache__/
 summarize_information/db.sqlite3
-keys.json
+.env
 tasks.txt

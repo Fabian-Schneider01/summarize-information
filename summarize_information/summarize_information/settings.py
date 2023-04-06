@@ -24,11 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # load secret key from json file 
-file_path = os.path.join(os.path.dirname(__file__), '../../keys.json')
-with open(file_path) as f:
-    data = json.load(f)
 
-SECRET_KEY = data['api_keys'][1]['API_KEY']
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

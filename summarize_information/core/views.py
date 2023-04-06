@@ -1,6 +1,5 @@
 import os
 import json
-
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.textanalytics import TextAnalyticsClient
 from azure.ai.textanalytics import ExtractSummaryAction
@@ -15,13 +14,8 @@ def load_test_phrases():
         test_phrases = json.load(f)
     return test_phrases
 
-# Read Azure API key and endpoint from json file
-file_path = os.path.join(os.path.dirname(__file__), '../../keys.json')
-with open(file_path) as f:
-    data = json.load(f)
-
-AZURE_API_KEY = data["api_keys"][0]["API_KEY"]
-AZURE_API_ENDPOINT = data['api_keys'][0]['API_ENDPOINT']
+AZURE_API_KEY = os.environ.get('AZURE_API_KEY')
+AZURE_API_ENDPOINT = os.environ.get('AZURE_API_ENDPOINT')
 
 @csrf_exempt
 def index(request):
@@ -34,11 +28,11 @@ def index(request):
 
     if unsummarized_text:
         if not input_exists(unsummarized_text):
-            summarizedText = sample_extractive_summarization(client, unsummarized_text)
-            Text.objects.create(input_text=unsummarized_text, output_text=summarizedText)
+            summarized_text = sample_extractive_summarization(client, unsummarized_text)
+            Text.objects.create(input_text=unsummarized_text, output_text=summarized_text)
         else:
-            summarizedText = get_output_if_exists(unsummarized_text)
-
+            summarized_text = get_output_if_exists(unsummarized_text)
+    print(summarized_text)
     return render(request, 'core/index.html', {'unsummarizedText': unsummarized_text, 'summarizedText': summarized_text})
 
 
