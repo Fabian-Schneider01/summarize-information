@@ -22,6 +22,7 @@ defusedxml==0.7.1
 display==1.0.0
 distlib==0.3.4
 Django==4.0.3
+django-rest-framework==0.1.0  
 docutils==0.18.1
 entrypoints==0.4
 executing==0.8.3
@@ -51,7 +52,6 @@ jupyterlab-widgets==1.1.0
 Keras==1.2.2
 Kivy==2.1.0
 Kivy-Garden==0.1.5
-kiwisolver==1.4.0
 MarkupSafe==2.1.1
 matplotlib==3.5.1
 matplotlib-inline==0.1.3
@@ -92,7 +92,6 @@ pytz==2022.1
 PyYAML==6.0
 pyzmq==22.3.0
 requests==2.27.1
-scipy==1.8.0
 Send2Trash==1.8.0
 six==1.16.0
 sniffio==1.2.0
