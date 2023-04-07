@@ -1,11 +1,32 @@
+version: "3.9"
 services:
-  django:
-    image: summarize-information:0.0.1
-    build:
-      context: ./summarize_information
+  nginx:
+    build: ./nginx/
+    restart: always
+    volumes:
+      - uwsgi_data:/tmp/uwsgi/
+      - web_static:/var/www/summarize_information/assets/:ro
     ports:
-      - "8000:8000"
+      - "8888:80"
+    depends_on: 
+      - django
+
+  django:
+    build: ./summarize_information/
+    restart: always
+    command: >
+      sh -c "python manage.py collectstatic --noinput 
+      && uwsgi --ini summarize_information.uwsgi.ini"
+    volumes:
+      - uwsgi_data:/tmp/uwsgi/
+      - web_static:/code/static/
+      - web_static:/var/www/summarize_information/assets/
     environment:
       - AZURE_API_KEY=${AZURE_API_KEY}
       - AZURE_API_ENDPOINT=${AZURE_API_ENDPOINT}
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+
+
+volumes:
+  uwsgi_data:
+  web_static:

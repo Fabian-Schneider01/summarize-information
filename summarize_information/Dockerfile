@@ -12,4 +12,6 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["uwsgi", "--ini", "/code/summarize_information.uwsgi.ini"]
+
+#CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
