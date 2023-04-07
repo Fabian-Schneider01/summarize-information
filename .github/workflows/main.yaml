@@ -13,12 +13,12 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r ./summarize_information/requirements.txt
 
     - name: Set environment variables
       env:
@@ -32,4 +32,4 @@ jobs:
 
     - name: Run tests
       run: |
-        python manage.py test
+        python ./summarize_information/manage.py test core
