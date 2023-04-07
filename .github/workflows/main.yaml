@@ -32,5 +32,4 @@ jobs:
 
     - name: Run tests
       run: |
-        cd /summarize_information
-        python manage.py test
+        python ./summarize_information/manage.py test
