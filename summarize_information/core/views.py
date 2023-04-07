@@ -1,5 +1,6 @@
 import os
 import json
+from dotenv import load_dotenv
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.textanalytics import TextAnalyticsClient
 from azure.ai.textanalytics import ExtractSummaryAction
@@ -8,14 +9,16 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import Text
 
+load_dotenv()
+
+AZURE_API_KEY = os.getenv('AZURE_API_KEY')
+AZURE_API_ENDPOINT = os.getenv('AZURE_API_ENDPOINT')
+
 def load_test_phrases():
     file_path_testphrases = os.path.join(os.path.dirname(__file__), '../../testphrases.json')
     with open(file_path_testphrases) as f:
         test_phrases = json.load(f)
     return test_phrases
-
-AZURE_API_KEY = os.environ.get('AZURE_API_KEY')
-AZURE_API_ENDPOINT = os.environ.get('AZURE_API_ENDPOINT')
 
 @csrf_exempt
 def index(request):
