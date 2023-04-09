@@ -6,13 +6,13 @@ WORKDIR /code
 
 COPY requirements.txt .
 
-RUN apt-get update && \
-    apt-get -y install build-essential && \
-    pip install uwsgi && \
-    pip install -r requirements.txt && \
-    apt-get remove -y build-essential && \
-    apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt update && \
+    apt install -y vim && \
+    apt-get install -y python3-pip && \
+    apt install gcc && \
+    pip3 install uwsgi 
+
+RUN pip install -r requirements.txt
 
 COPY . .
 
