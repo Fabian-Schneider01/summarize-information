@@ -7,7 +7,7 @@ services:
       - uwsgi_data:/tmp/uwsgi/
       - web_static:/var/www/summarize_information/assets/:ro
     ports:
-      - "8888:80"
+      - "80:80"
     depends_on: 
       - django
 
