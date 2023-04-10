@@ -4,7 +4,10 @@ azure-common==1.1.28
 azure-core==1.26.3
 certifi==2022.12.7
 charset-normalizer==3.1.0
-Django==4.2
+django==3.2
+django-crispy-forms
+whitenoise
+psycopg2-binary
 idna==3.4
 isodate==0.6.1
 msrest==0.7.1
