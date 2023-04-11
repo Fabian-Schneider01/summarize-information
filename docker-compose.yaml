@@ -1,6 +1,7 @@
 version: "3.3"
 services:
   nginx:
+    container_name: nginx
     build: ./nginx/
     restart: always
     volumes:
@@ -12,6 +13,7 @@ services:
       - django
 
   django:
+    container_name: django
     build: ./summarize_information/
     restart: always
     command: >
