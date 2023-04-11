@@ -26,6 +26,13 @@ services:
       - AZURE_API_ENDPOINT=${AZURE_API_ENDPOINT}
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - AZURE_DB_PW=${AZURE_DB_PW}
+  
+  prometheus:
+    image: prom/prometheus
+    volumes: 
+      - ./prometheus/:/etc/prometheus/
+    ports:
+      - "9090:9090"
 
 
 volumes:
