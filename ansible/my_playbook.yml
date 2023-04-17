@@ -1,0 +1,61 @@
+- name: Deploy Docker Compose on Azure VM
+  hosts: azure_vm
+  become: true
+
+  vars:
+    environment_variables:
+      
+
+  tasks:
+    - name: Install Git
+      apt:
+        name: git
+        update_cache: yes
+
+    - name: Clone repository containing Docker Compose file
+      git:
+        repo: https://github.com/Fabian-Schneider01/summarize-information.git
+        dest: /home/azureuser/summarize-information
+        version: master
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        update_cache: yes
+
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
+        update_cache: yes
+
+    - name: Copy Docker Compose file to VM
+      copy:
+        src: /home/azureuser/summarize-information/docker-compose.yaml
+        dest: /home/azureuser/summarize-information/docker-compose.yaml
+        owner: azureuser
+        group: azureuser
+        mode: '0644'
+        remote_src: yes
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install GCC
+      apt:
+        name: gcc
+        state: present
+
+    - name: Install required packages
+      apt:
+        name:
+          - build-essential
+          - python3-dev
+        state: present
+      
+    - name: Start containers using Docker Compose
+      shell: |
+        cd /home/azureuser/summarize-information/
+        docker-compose build
+        docker-compose up -d
+      environment: "{{ environment_variables }}"
