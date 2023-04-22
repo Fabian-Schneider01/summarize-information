@@ -1,8 +1,9 @@
 import os
 import json
+import hashlib
 from django.test import TestCase, Client, RequestFactory
 from .models import Text
-from core.views import input_exists, get_output_if_exists, load_test_phrases, index
+from core.views import input_exists, get_output_if_exists, load_test_phrases, index, hash_unsummarized
 from .views import sample_extractive_summarization, authenticate_client
 
 class TestSummarization(TestCase):
@@ -53,3 +54,18 @@ class TestSummarization(TestCase):
 
     def test_input_does_not_exist(self):
         self.assertFalse(input_exists('test output'))
+
+    def test_hash_unsummarized(self):
+        # Define a test string to hash
+        unsummarized = 'test string'
+        
+        # Call the function being tested
+        hashed = hash_unsummarized(unsummarized)
+        
+        # Compute the expected hash using the same method
+        hash_object = hashlib.sha256()
+        hash_object.update(unsummarized.encode())
+        expected_hash = hash_object.hexdigest()
+        
+        # Assert that the computed hash matches the expected hash
+        self.assertEqual(hashed, expected_hash)
