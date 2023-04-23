@@ -28,7 +28,7 @@ jobs:
     - name: Set environment variables
       env:
         AZURE_API_KEY: ${{ secrets.AZURE_API_KEY }}
-        AZURE_DB:PW: ${{ secrets.AZURE_DB_PW }}
+        AZURE_DB_PW: ${{ secrets.AZURE_DB_PW }}
         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
         export AZURE_API_KEY=$AZURE_API_KEY
@@ -38,3 +38,11 @@ jobs:
     - name: Run tests
       run: |
         python ./summarize_information/manage.py test core
+      if: ${{ job.status == 'success' }} || ${{ job.status == 'skipped' }}
+
+    - name: Abort on failed tests
+      run: |
+        if [ "${{ job.status }}" = "failure" ]; then
+          echo "Tests failed, aborting push"
+          exit 1
+        fi
