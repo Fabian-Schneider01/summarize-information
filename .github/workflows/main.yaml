@@ -2,6 +2,11 @@ name: Django CI
 
 on: [push]
 
+env:
+  AZURE_API_KEY: ${{ secrets.AZURE_API_KEY }}
+  AZURE_DB_PW: ${{ secrets.AZURE_DB_PW }}
+  DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+  
 jobs:
   build:
 
