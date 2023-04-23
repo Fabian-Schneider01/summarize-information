@@ -20,35 +20,23 @@ def index(request):
     client = authenticate_client()
     unsummarized_text = request.POST.get('unsummarized_text', '')
     summarized_text = ''
-
     if unsummarized_text:
         if not input_exists(hash_unsummarized(unsummarized_text)):
             summarized_text = sample_extractive_summarization(client, unsummarized_text)
             Text.objects.create(input_text=hash_unsummarized(unsummarized_text), output_text=summarized_text)
         else:
-            summarized_text = get_output_if_exists(hash_unsummarized(unummarized_text))
-    print(summarized_text)
+            summarized_text = get_output_if_exists(hash_unsummarized(unsummarized_text))
     return render(request, 'core/index.html', {'unsummarized_text': unsummarized_text, 'summarized_text': summarized_text})
 
-# Authenticate the client for Azure Text Analytics service
 def authenticate_client():
     ta_credential = AzureKeyCredential(AZURE_API_KEY)
-    text_analytics_client = TextAnalyticsClient(
-        endpoint=AZURE_API_ENDPOINT,
-        credential=ta_credential)
+    text_analytics_client = TextAnalyticsClient(endpoint=AZURE_API_ENDPOINT, credential=ta_credential)
     return text_analytics_client
 
-# Analyze the text using Azure Text Analytics service
 def sample_extractive_summarization(client, input_text):
     document = [input_text]
-    poller = client.begin_analyze_actions(
-        document,
-        actions=[
-            ExtractSummaryAction(max_sentence_count=4)
-        ],
-    )
+    poller = client.begin_analyze_actions(document, actions=[ExtractSummaryAction(max_sentence_count=4)])
     document_results = poller.result()
-
     output_text = ''
     for result in document_results:
         extract_summary_result = result[0]
@@ -63,11 +51,9 @@ def hash_unsummarized(unsummarized):
     hashed_unsummarized = hash_object.hexdigest()
     return hashed_unsummarized
 
-# Check if input already exists in the database
 def input_exists(text):
     return Text.objects.filter(input_text=text).exists()
 
-# If output exists, get the entry from the database
 def get_output_if_exists(text):
     try:
         output_text = Text.objects.get(input_text=text).output_text
