@@ -34,7 +34,7 @@ def index(request):
         else:
             summarized_text = get_output_if_exists(unsummarized_text)
     print(summarized_text)
-    return render(request, 'core/index.html', {'unsummarizedText': unsummarized_text, 'summarizedText': summarized_text})
+    return render(request, 'core/index.html', {'unsummarizedText': unsummarized_text, 'summarizedText': summarized_text, 'azure_key': os.getenv('AZURE_API_KEY')})
 
 # Authenticate the client for Azure Text Analytics service
 def authenticate_client():
