@@ -17,7 +17,7 @@
                   Unsummarized Text
                 </div>
                 <div class="card-body">
-                    <textarea class="form-control input-text" aria-label="With textarea" type="text" name="unsummarizedText" style="height: 60vh">{{unsummarizedText}}</textarea>
+                    <textarea class="form-control input-text" aria-label="With textarea" type="text" name="unsummarized_text" style="height: 60vh">{{unsummarized_text}}</textarea>
                 </div>
             </div>
             <div class="card col p-0 m-2">
@@ -25,15 +25,14 @@
                   Summarized Text
                 </div>
                 <div class="card-body">
-                    <textarea readonly class="form-control output-text" aria-label="With textarea" style="height: 60vh">{{summarizedText}}</textarea>
+                    <textarea readonly class="form-control output-text" aria-label="With textarea" name="summarized_text" style="height: 60vh">{{summarized_text}}</textarea>
                 </div>
             </div>
         </div>
         <div class="row m-3">
             <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-primary btn m-1">Example</button>
-                <button type="submit" class="btn btn-primary btn m-1">Submit</button>
-                <button type="button" class="btn btn-primary btn clear-button m-1">Clear</button>
+                <button type="submit" name="submit_button" class="btn btn-primary btn m-1">Submit</button>
+                <button type="button" name="clear_button" class="btn btn-primary btn clear-button m-1">Clear</button>
             </div>
         </div>
     </form>

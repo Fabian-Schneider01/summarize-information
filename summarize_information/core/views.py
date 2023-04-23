@@ -15,16 +15,10 @@ load_dotenv()
 AZURE_API_KEY = os.getenv('AZURE_API_KEY')
 AZURE_API_ENDPOINT = "https://cloud-computing.cognitiveservices.azure.com/"
 
-def load_test_phrases():
-    file_path_testphrases = os.path.join(os.path.dirname(__file__), '../../testphrases.json')
-    with open(file_path_testphrases) as f:
-        test_phrases = json.load(f)
-    return test_phrases
-
 @csrf_exempt
 def index(request):
     client = authenticate_client()
-    unsummarized_text = request.POST.get('unsummarizedText', '')
+    unsummarized_text = request.POST.get('unsummarized_text', '')
     summarized_text = ''
 
     if unsummarized_text:
@@ -32,9 +26,10 @@ def index(request):
             summarized_text = sample_extractive_summarization(client, unsummarized_text)
             Text.objects.create(input_text=hash_unsummarized(unsummarized_text), output_text=summarized_text)
         else:
-            summarized_text = get_output_if_exists(unsummarized_text)
+            summarized_text = get_output_if_exists(hash_unsummarized(unsummarized_text))
+            print(summarized_text)
     print(summarized_text)
-    return render(request, 'core/index.html', {'unsummarizedText': unsummarized_text, 'summarizedText': summarized_text, 'azure_key': os.getenv('AZURE_API_KEY')})
+    return render(request, 'core/index.html', {'unsummarized_text': unsummarized_text, 'summarized_text': summarized_text})
 
 # Authenticate the client for Azure Text Analytics service
 def authenticate_client():
@@ -73,7 +68,6 @@ def hash_unsummarized(unsummarized):
 def input_exists(text):
     return Text.objects.filter(input_text=text).exists()
 
-
 # If output exists, get the entry from the database
 def get_output_if_exists(text):
     try:
@@ -81,5 +75,3 @@ def get_output_if_exists(text):
         return output_text
     except Text.DoesNotExist:
         return None
-
-
