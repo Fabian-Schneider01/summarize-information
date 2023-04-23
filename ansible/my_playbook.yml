@@ -4,7 +4,10 @@
 
   vars:
     environment_variables:
-      
+      AZURE_API_KEY: "{{ lookup('env', 'AZURE_API_KEY') }}"
+      AZURE_DB_PW: "{{ lookup('env', 'AZURE_DB_PW') }}"
+      DJANGO_SECRET_KEY: "{{ lookup('env', 'DJANGO_SECRET_KEY') }}"
+
 
   tasks:
     - name: Install Git
@@ -52,10 +55,9 @@
           - build-essential
           - python3-dev
         state: present
-      
+
     - name: Start containers using Docker Compose
-      shell: |
-        cd /home/azureuser/summarize-information/
-        docker-compose build
-        docker-compose up -d
+      command: docker-compose up -d
+      args:
+        chdir: /home/azureuser/summarize-information/
       environment: "{{ environment_variables }}"

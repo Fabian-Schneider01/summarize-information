@@ -25,7 +25,6 @@ services:
       - web_static:/var/www/summarize_information/assets/
     environment:
       - AZURE_API_KEY=${AZURE_API_KEY}
-      - AZURE_API_ENDPOINT=${AZURE_API_ENDPOINT}
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - AZURE_DB_PW=${AZURE_DB_PW}
   
