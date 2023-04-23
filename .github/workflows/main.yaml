@@ -30,6 +30,6 @@ jobs:
         export AZURE_DB_PW=$AZURE_DB_PW
         export DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
 
-    # - name: Run tests
-    #   run: |
-    #     python ./summarize_information/manage.py test core
+    - name: Run tests
+      run: |
+        python ./summarize_information/manage.py test core
