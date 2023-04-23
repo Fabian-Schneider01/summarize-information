@@ -4,11 +4,9 @@
 
   vars:
     environment_variables:
-      AZURE_API_KEY: "{{ lookup('env', 'AZURE_API_KEY') }}"
-      AZURE_API_ENDPOINT: "{{ lookup('env', 'AZURE_API_ENDPOINT') }}"
-      AZURE_DB_PW: "{{ lookup('env', 'AZURE_DB_PW') }}"
-      DJANGO_SECRET_KEY: "{{ lookup('env', 'DJANGO_SECRET_KEY') }}"
-
+      AZURE_API_KEY: "{{ secrets.AZURE_API_KEY }}"
+      DJANGO_SECRET_KEY: "{{ secrets.DJANGO_SECRET_KEY }}"
+      AZURE_DB_PW: "{{ secrets.AZURE_DB_PW }}"
 
   tasks:
     - name: Install Git
