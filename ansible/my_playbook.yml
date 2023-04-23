@@ -57,7 +57,10 @@
         state: present
 
     - name: Start containers using Docker Compose
-      command: docker-compose up -d
+      shell: |
+        cd /home/azureuser/summarize-information/
+        docker-compose build
+        docker-compose up -d
       args:
         chdir: /home/azureuser/summarize-information/
       environment: "{{ environment_variables }}"
