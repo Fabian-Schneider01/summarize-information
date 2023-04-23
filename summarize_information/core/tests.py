@@ -14,12 +14,9 @@ class TestSummarization(TestCase):
         Text.objects.create(input_text="test input", output_text="test output")
 
     def test_index_view(self):
-        request = self.factory.post('/', {'unsummarizedText': 'This is a test input for summarization.'})
+        request = self.factory.post('/', {'unsummarized_text': 'This is a test input for summarization.'})
         response = index(request)
-        self.assertIn('summarizedText', response.content.decode('utf-8'))
-        request = self.factory.post('/', {'unsummarizedText': 'This is a test input for summarization.'})
-        response = index(request)
-        self.assertIn('summarizedText', response.content.decode('utf-8'))
+        self.assertIn('summarized_text', response.content.decode('utf-8'))
 
     def test_existing_input_text(self):
         input_text = "test input"

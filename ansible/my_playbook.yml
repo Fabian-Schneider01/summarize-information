@@ -9,13 +9,6 @@
       AZURE_DB_PW: "{{ lookup('env', 'AZURE_DB_PW') }}"
 
   tasks:
-    - name: Load GitHub secrets
-      set_fact:
-        environment_variables:
-          AZURE_API_KEY: "{{ lookup('env', 'AZURE_API_KEY') }}"
-          DJANGO_SECRET_KEY: "{{ lookup('env', 'DJANGO_SECRET_KEY') }}"
-          AZURE_DB_PW: "{{ lookup('env', 'AZURE_DB_PW') }}"
-
     - name: Install Git
       apt:
         name: git
