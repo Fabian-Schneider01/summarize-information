@@ -26,8 +26,7 @@ def index(request):
             summarized_text = sample_extractive_summarization(client, unsummarized_text)
             Text.objects.create(input_text=hash_unsummarized(unsummarized_text), output_text=summarized_text)
         else:
-            summarized_text = get_output_if_exists(hash_unsummarized(unsummarized_text))
-            print(summarized_text)
+            summarized_text = get_output_if_exists(hash_unsummarized(unummarized_text))
     print(summarized_text)
     return render(request, 'core/index.html', {'unsummarized_text': unsummarized_text, 'summarized_text': summarized_text})
 
