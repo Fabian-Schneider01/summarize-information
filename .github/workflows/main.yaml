@@ -23,11 +23,11 @@ jobs:
     - name: Set environment variables
       env:
         AZURE_API_KEY: ${{ secrets.AZURE_API_KEY }}
-        AZURE_API_ENDPOINT: ${{ secrets.AZURE_API_ENDPOINT }}
+        AZURE_DB:PW: ${{ secrets.AZURE_DB_PW }}
         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
         export AZURE_API_KEY=$AZURE_API_KEY
-        export AZURE_API_ENDPOINT=$AZURE_API_ENDPOINT
+        export AZURE_DB_PW=$AZURE_DB_PW
         export DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
 
     # - name: Run tests
