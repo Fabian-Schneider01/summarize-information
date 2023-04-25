@@ -198,7 +198,7 @@ resource "azurerm_virtual_machine" "example" {
   }
 }
 
-# Create postgres db
+# Konfiguration der Datenbank 
 resource "azurerm_postgresql_server" "example" {
   name                = "summarizeinformationdb"
   location            = "${azurerm_resource_group.example.location}"
